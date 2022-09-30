@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
@@ -212,11 +213,15 @@ class _PlacePickerState extends State<PlacePicker> {
 
   Future<PlaceProvider> _initPlaceProvider() async {
     final headers = await GoogleApiHeaders().getHeaders();
+    Map<String, String> webHeader = {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Header": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
+    };
     final provider = PlaceProvider(
       widget.apiKey,
       widget.proxyBaseUrl,
       widget.httpClient,
-      headers,
+      kIsWeb ? webHeader : headers,
     );
     provider.sessionToken = Uuid().generateV4();
     provider.desiredAccuracy = widget.desiredLocationAccuracy;
