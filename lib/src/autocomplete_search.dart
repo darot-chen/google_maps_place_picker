@@ -35,7 +35,7 @@ class AutoCompleteSearch extends StatefulWidget {
     this.autocompleteOnTrailingWhitespace,
     this.customTextField,
     required this.searchController,
-  })   : assert(searchBarController != null),
+  })  : assert(searchBarController != null),
         super(key: key);
 
   final String? sessionToken;
@@ -288,7 +288,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
         sessionToken: widget.sessionToken,
         location: provider.currentPosition == null
             ? null
-            : Location(lat: provider.currentPosition!.latitude, lng: provider.currentPosition!.longitude),
+            : Location(provider.currentPosition!.latitude, provider.currentPosition!.longitude),
         offset: widget.autocompleteOffset,
         radius: widget.autocompleteRadius,
         language: widget.autocompleteLanguage,
